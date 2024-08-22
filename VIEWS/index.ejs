@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quora-like Home Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container for Posts and New Post Button */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for New Post Button */
+        .new-post-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .new-post-btn:hover {
+            background-color: #27ae60;
+        }
+
+        /* Styling Each Post */
+        .post {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .post:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Title Styling */
+        .post-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Content Styling */
+        .post-content {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Post Actions Styling */
+        .post-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Button Styling */
+        .edit-btn, .delete-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        /* Button Hover Effects */
+        .edit-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .post-title {
+                font-size: 22px;
+            }
+
+            .post-content {
+                font-size: 16px;
+            }
+
+            .edit-btn, .delete-btn {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/post/new" class="new-post-btn">New Post</a>
+        <% for(posts of post){ %>
+            <div class="post">
+                <h1 class="post-title"><%= posts.title %></h1>
+                <p class="post-content"><%= posts.content %></p>
+                <div class="post-actions">
+                   <form action="/post/<%= posts._id %>/edit" method="get">
+                    <button class="edit-btn">Edit</button>
+                </form>
+                    <form action="/post/<%= posts._id %>?_method=Delete" method="get">
+                    <button class="delete-btn">Delete</button>
+
+                </form>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
